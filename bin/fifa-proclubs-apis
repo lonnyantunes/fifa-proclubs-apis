@@ -1,0 +1,4 @@
+#!/usr/bin/env ruby
+require 'fifa/game/cli'
+
+Fifa::Game::CLI.start

@@ -1,4 +1,4 @@
-name: Deploy Ruby Gem
+name: Deploy RubyGem to Github Packages registry
 
 on:
   push:
@@ -18,15 +18,18 @@ jobs:
       uses: actions/setup-ruby@v1
       with:
         ruby-version: 2.6.x
-
-    - name: Publish to Github Packages Registry
+    - name: Install dependencies
+      run: bundle install
+    - name: Build gem
+      run:  gem build *.gemspec
+    - name: Setup Github Packages registry credentials
       run: |
         mkdir -p $HOME/.gem
         touch $HOME/.gem/credentials
         chmod 0600 $HOME/.gem/credentials
-        printf -- "---\n:github: ${PUBLISH_GEM_TO_GITHUB_TOKEN}\n" > $HOME/.gem/credentials
-        gem build *.gemspec
-        gem push --KEY github --host https://rubygems.pkg.github.com/${OWNER} *.gem
+        printf -- "---\n:github: ${GEM_HOST_API_KEY}\n" > $HOME/.gem/credentials
+    - name: Publish to Github Packages Registry
+      run: gem push --KEY github --host https://rubygems.pkg.github.com/${OWNER} *.gem
       env:
-        GEM_HOST_API_KEY: "Bearer ${{secrets.GITHUB_TOKEN}}"
+        GEM_HOST_API_KEY: "Bearer ${{secrets.PUBLISH_GEM_TO_GITHUB_TOKEN}}"
         OWNER: ${{ github.repository_owner }}

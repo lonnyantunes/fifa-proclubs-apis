@@ -35,6 +35,11 @@ module Fifa
         Apis::Manager.club_matches_history(platform, club_name)
       end
 
+      def self.club_members(platform, club_name)
+        check_parameters(options: { platform: platform, club_name: club_name })
+        Apis::Manager.club_members(platform, club_name)
+      end
+
       def self.player_datas(platform, club_name, player_name)
         check_parameters(options: { platform: platform, club_name: club_name, player_name: player_name })
         Apis::Manager.player_datas(platform, club_name, player_name)

@@ -128,6 +128,23 @@ module Fifa
           end
         end
 
+        def self.club_members(platform, club_name)
+          result = club_id_by_name(platform, club_name)
+
+          if result.error_message_handler
+            error_message_handler = result.error_message_handler
+          else
+            club_id = result.obj_result
+            club_members_stats = members_club_stats(platform, club_id)[0]
+
+            unless club_members_stats
+              error_message_handler = ErrorMessageHandler.error_handler(ErrorMessageHandler::ERROR_CLUB_MEMBERS_STATS % [platform, club.clubName])
+            end
+          end
+
+          Apis::Result.new(error_message_handler, club_members_stats)
+        end
+
         def self.player_datas(platform, club_name, player_name)
           result = club_id_by_name(platform, club_name)
 

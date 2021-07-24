@@ -11,6 +11,7 @@ module Fifa
         PLAYER_NOT_FOUND_IN_CLUB = "player '%s' not found in club '%s'"
         ERROR_CAREER_STATS = "Career statistics : %s"
         ERROR_CLUB_STATS = "Club statistics : %s"
+        ERROR_CLUB_MEMBERS_STATS = "Platform '%s' : no members found for club '%s'"
         ERROR_CLUB_MEMBER_STATS = "#{CLUB_STATS_NOT_FOUND} and member %s"
         TOP100_PLAYER_NOT_FOUND = "Player '%s' not found in the top 100"
 

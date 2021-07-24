@@ -97,6 +97,28 @@ module Fifa
         raise error
       end
 
+
+      desc 'club_members [-d|-v|-p|-c]', 'To get members of a club'
+      long_desc <<-LONGDESC
+      The method 'club_members' is used to get members of a club
+
+      > from: Lonny Antunes
+      LONGDESC
+      method_option :platform,    type: :string, default: nil, aliases: '-p'
+      method_option :club_name,   type: :string, default: nil, aliases: '-c'
+
+      def club_members
+        Fifa::Game.club_members(
+          options[:debug],
+          options[:verbose],
+          options[:platform],
+          options[:club_name]
+        )
+      rescue => error
+        Fifa::Utils::Log.error("Log path : #{Fifa::Utils::Log.log_path}\n")
+        raise error
+      end
+
       desc 'player_datas [-d|-v|-p|-c|-n]', 'To get datas about a player'
       long_desc <<-LONGDESC
       The method 'player_datas' is used to get datas about a player

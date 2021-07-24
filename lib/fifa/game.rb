@@ -23,6 +23,11 @@ module Fifa
       Proclubs::Apis.club_matches_history(platform, club_name)
     end
 
+    def self.club_members(is_debug, is_verbose, platform, club_name)
+      init(is_debug, is_verbose, __method__.to_s)
+      Proclubs::Apis.club_members(platform, club_name)
+    end
+
     def self.player_datas(is_debug, is_verbose, platform, club_name, player_name)
       init(is_debug, is_verbose, __method__.to_s)
       Proclubs::Apis.player_datas(platform, club_name, player_name)

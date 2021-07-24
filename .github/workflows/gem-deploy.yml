@@ -20,7 +20,6 @@ jobs:
         ruby-version: 2.6.x
     - name: Install dependencies
       run: |
-        bundle update --bundler
         gem install bundler:2.2.21
         bundle install
     - name: Build gem

@@ -19,7 +19,10 @@ jobs:
       with:
         ruby-version: 2.6.x
     - name: Install dependencies
-      run: bundle install
+      run: |
+        bundle update --bundler
+        gem install bundler:2.2.21
+        bundle install
     - name: Build gem
       run:  gem build *.gemspec
     - name: Setup Github Packages registry credentials
